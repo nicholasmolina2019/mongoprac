@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const Tweet = require('./models/tweet')
 const app = express();
 const PORT = 3000;
 
@@ -9,6 +10,16 @@ const db = mongoose.connection;
 mongoose.connect(DATABASE_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
+});
+// Middleware
+// Body parser middleware: it creates req.body
+app.use(express.urlencoded({ extended: false }));
+
+// Routes / Controllers
+
+// Create
+app.post('/tweets', (req, res) => {
+	res.send(req.body);
 });
 
 // Database Connection Error/Success
